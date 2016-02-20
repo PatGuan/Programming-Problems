@@ -110,8 +110,4 @@ public class RobotPath {
         }
     };
 
-    public static void main(String[] args) {
-        System.out.println(RobotPath.YES.equals(RobotPath.doesCircleExist("GRGRGRG")));
-    }
-
 }
