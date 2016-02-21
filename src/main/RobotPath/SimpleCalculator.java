@@ -23,6 +23,8 @@ package src.main.RobotPath;
 */
 
 
+import java.util.HashMap;
+
 public class SimpleCalculator {
 
 
@@ -32,17 +34,39 @@ public class SimpleCalculator {
     public static final Character ADDITION = '+';
     public static final Character SUBTRACTION = '-';
 
+    public static int calculate(String expression) {
+        return calculateStringExpression(expression).get("currentTotal");
+    }
 
-    public static int calculateStringExpression(String expression) {
+    public static HashMap<String, Integer> calculateStringExpression(String expression) {
 
         int currentTotal = 0;
+        int i;
         Character operator = null;
+        HashMap<String, Integer> currentTotalAndSubExpressionLength = new HashMap<String, Integer>();
 
-        for (int i = 0; i < expression.length(); i++) {
+        for (i = 0; i < expression.length(); i++) {
             Character character = expression.charAt(i);
 
+            //Handles the case of opening bracket
+            if (isOpeningBracket(character)) {
+                HashMap calculatedResult = calculateStringExpression(expression.substring(i+1));
+                int subTotalInBrackets = (Integer) calculatedResult.get("currentTotal");
+                i += (Integer) calculatedResult.get(new String("expressionLength"));
+                if (operator != null) {
+                    currentTotal = applyOperatorToValues(currentTotal, subTotalInBrackets, operator);
+                }
+                else {
+                    currentTotal = subTotalInBrackets;
+                }
+            }
+            else if (isClosingBracket(character)) {
+                currentTotalAndSubExpressionLength.put("currentTotal", currentTotal);
+                currentTotalAndSubExpressionLength.put("expressionLength", i+1);
+                return currentTotalAndSubExpressionLength;
+            }
             //Handles the case of addition character
-            if (isAddition(character)) {
+            else if (isAddition(character)) {
                 operator = ADDITION;
             }
             //Handles the case of subtraction character
@@ -55,14 +79,15 @@ public class SimpleCalculator {
             }
             //Is a numeric value that needs to be summed
             else if (!isAddition(character) && !isSubtraction(character)) {
-                currentTotal = applyOperatorToValues(currentTotal, character, operator);
+                currentTotal = applyOperatorToValues(currentTotal, Character.getNumericValue(character), operator);
             }
         }
-        return currentTotal;
+        currentTotalAndSubExpressionLength.put("currentTotal", currentTotal);
+        currentTotalAndSubExpressionLength.put("expressionLength", i);
+        return currentTotalAndSubExpressionLength;
     }
 
-    public static int applyOperatorToValues(int total, Character character, Character operator) {
-        int valueToBeSummed = Character.getNumericValue(character);
+    public static int applyOperatorToValues(int total, int valueToBeSummed, Character operator) {
         if (isAddition(operator)) {
             return total += valueToBeSummed;
         }
@@ -74,6 +99,12 @@ public class SimpleCalculator {
     }
     public static boolean isSubtraction(Character c) {
         return SUBTRACTION.equals(c);
+    }
+    public static boolean isOpeningBracket(Character c) {
+        return OPENING_BRACKET.equals(c);
+    }
+    public static boolean isClosingBracket(Character c) {
+        return CLOSING_BRACKET.equals(c);
     }
 
     public static void main(String[] args) {
