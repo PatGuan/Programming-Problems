@@ -34,8 +34,13 @@ public class SimpleCalculator {
     public static final Character ADDITION = '+';
     public static final Character SUBTRACTION = '-';
 
-    public static int calculate(String expression) {
-        return calculateStringExpression(expression).get("currentTotal");
+    public static final String HASHMAP_TOTALVALUE_KEY = "currentTotal";
+    public static final String HASHMAP_EXPRESSIONLENGTH_KEY = "expressionLength";
+
+
+
+    public static int calculateValueFromStringExpression(String expression) {
+        return calculateStringExpression(expression).get(HASHMAP_TOTALVALUE_KEY);
     }
 
     public static HashMap<String, Integer> calculateStringExpression(String expression) {
@@ -43,7 +48,6 @@ public class SimpleCalculator {
         int currentTotal = 0;
         int i;
         Character operator = null;
-        HashMap<String, Integer> currentTotalAndSubExpressionLength = new HashMap<String, Integer>();
 
         for (i = 0; i < expression.length(); i++) {
             Character character = expression.charAt(i);
@@ -51,19 +55,12 @@ public class SimpleCalculator {
             //Handles the case of opening bracket
             if (isOpeningBracket(character)) {
                 HashMap calculatedResult = calculateStringExpression(expression.substring(i+1));
-                int subTotalInBrackets = (Integer) calculatedResult.get("currentTotal");
-                i += (Integer) calculatedResult.get(new String("expressionLength"));
-                if (operator != null) {
-                    currentTotal = applyOperatorToValues(currentTotal, subTotalInBrackets, operator);
-                }
-                else {
-                    currentTotal = subTotalInBrackets;
-                }
+                int subTotalInBrackets = (Integer) calculatedResult.get(HASHMAP_TOTALVALUE_KEY);
+                currentTotal = handleSubtotalInBrackets(operator, currentTotal, subTotalInBrackets);
+                i += (Integer) calculatedResult.get(HASHMAP_EXPRESSIONLENGTH_KEY);
             }
             else if (isClosingBracket(character)) {
-                currentTotalAndSubExpressionLength.put("currentTotal", currentTotal);
-                currentTotalAndSubExpressionLength.put("expressionLength", i+1);
-                return currentTotalAndSubExpressionLength;
+                return mapTotalValueAndExpressionLength(currentTotal, i);
             }
             //Handles the case of addition character
             else if (isAddition(character)) {
@@ -82,9 +79,24 @@ public class SimpleCalculator {
                 currentTotal = applyOperatorToValues(currentTotal, Character.getNumericValue(character), operator);
             }
         }
-        currentTotalAndSubExpressionLength.put("currentTotal", currentTotal);
-        currentTotalAndSubExpressionLength.put("expressionLength", i);
+
+        return mapTotalValueAndExpressionLength(currentTotal, i);
+    }
+
+    public static HashMap mapTotalValueAndExpressionLength(int currentTotal, int expressionLength) {
+        HashMap<String, Integer> currentTotalAndSubExpressionLength = new HashMap<String, Integer>();
+        currentTotalAndSubExpressionLength.put(HASHMAP_TOTALVALUE_KEY, currentTotal);
+        currentTotalAndSubExpressionLength.put(HASHMAP_EXPRESSIONLENGTH_KEY, expressionLength + 1);
         return currentTotalAndSubExpressionLength;
+    }
+
+    public static int handleSubtotalInBrackets(Character operator, int currentTotal, int subTotal) {
+        if (operator != null) {
+            return applyOperatorToValues(currentTotal, subTotal, operator);
+        }
+        else {
+            return subTotal;
+        }
     }
 
     public static int applyOperatorToValues(int total, int valueToBeSummed, Character operator) {
@@ -105,10 +117,6 @@ public class SimpleCalculator {
     }
     public static boolean isClosingBracket(Character c) {
         return CLOSING_BRACKET.equals(c);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(SimpleCalculator.calculateStringExpression("20-10"));
     }
 
 }
