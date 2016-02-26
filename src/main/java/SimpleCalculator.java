@@ -79,7 +79,6 @@ public class SimpleCalculator {
                 currentTotal = applyOperatorToValues(currentTotal, Character.getNumericValue(character), operator);
             }
         }
-
         return mapTotalValueAndExpressionLength(currentTotal, i);
     }
 
