@@ -1,4 +1,4 @@
-package src.main.RobotPath;
+package src.main.java;
 
 /*
 You have created a computer simulation of a mobile robot. The robot moves on an infinite plane, starting from position (0,0).

@@ -1,13 +1,20 @@
-package src.test;
+package src.test.java;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import src.main.RobotPath.RobotPath;
+import src.main.java.RobotPath;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RobotPathTest {
 
+
+    @Before
+    public void clearAllDirectionCounters() {
+        RobotPath.EASTANDWESTCOUNTER = 0;
+        RobotPath.NORTHANDSOUTHCOUNTER = 0;
+    }
 
     @Test
     public void testDoesCircleExistForTurningOnlyRight() {
@@ -16,7 +23,7 @@ public class RobotPathTest {
 
     @Test
     public void testDoesCircleExistForSquarePath() {
-        assertEquals(RobotPath.YES, RobotPath.doesCircleExist("GRGRGRG"));
+        assertEquals("YES", RobotPath.doesCircleExist("GRGRGRG"));
     }
 
     @Test

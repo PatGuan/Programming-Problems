@@ -1,10 +1,9 @@
-package src.test;
+package src.test.java;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import src.main.RobotPath.SimpleCalculator;
+import src.main.java.SimpleCalculator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SimpleCalculatorTest {
 

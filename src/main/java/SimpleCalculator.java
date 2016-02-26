@@ -1,4 +1,4 @@
-package src.main.RobotPath;
+package src.main.java;
 
 /*
     Simple Calculator

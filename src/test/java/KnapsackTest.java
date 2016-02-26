@@ -1,13 +1,4 @@
-package src.test;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import src.main.RobotPath.Knapsack;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
+package src.test.java;
 
 public class KnapsackTest {
 

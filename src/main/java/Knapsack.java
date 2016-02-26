@@ -1,9 +1,6 @@
-package src.main.RobotPath;
+package src.main.java;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /*
     Given a set of items, each with weight and benefit, determine the items to include in the knapsack so that the total weight is less than or
