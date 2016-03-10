@@ -1,6 +1,6 @@
 package src.main.java;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
      The palindromic number 595595 is interesting because it can be written as the sum of consecutive squares: 62+72+82+92+102+112+12262+72+82+92+102+112+122 .
@@ -42,13 +42,13 @@ import java.util.ArrayList;
 
 public class PalindromicSums {
 
-    public static ArrayList<Integer> init(int numericSumLimit, int baseDifference) {
-        return getPalindromicSums(numericSumLimit, baseDifference, 1);
+    public static HashSet<Integer> init(int numericSumLimit, int baseDifference) {
+        return getPalindromicSums(numericSumLimit, baseDifference, 8);
     }
 
-    private static ArrayList<Integer> getPalindromicSums(int numericSumLimit, int baseDifference, int startingIteratingPosition) {
+    private static HashSet<Integer> getPalindromicSums(int numericSumLimit, int baseDifference, int startingIteratingPosition) {
         int i;
-        ArrayList<Integer> palindromicSums = new ArrayList<Integer>();
+        HashSet<Integer> palindromicSums = new HashSet<Integer>();
         int currentTotal = 0;
         for (i = startingIteratingPosition; i < Math.sqrt(numericSumLimit); i+=baseDifference) {
             currentTotal += i*i;
@@ -76,7 +76,7 @@ public class PalindromicSums {
 
 
     public static void main(String[] args) {
-        System.out.println(init(1000, 1));
+        System.out.println(init(700, 2));
     }
 
 }
