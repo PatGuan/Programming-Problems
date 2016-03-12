@@ -1,6 +1,7 @@
 package src.main.java;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
      The palindromic number 595595 is interesting because it can be written as the sum of consecutive squares: 62+72+82+92+102+112+12262+72+82+92+102+112+122 .
@@ -42,20 +43,36 @@ import java.util.HashSet;
 
 public class PalindromicSums {
 
-    public static HashSet<Integer> init(int numericSumLimit, int baseDifference) {
-        return getPalindromicSums(numericSumLimit, baseDifference, 8);
+    public static int init(int numericSumLimit, int baseDifference) {
+
+        int totalSumOfPalindromicValues = 0;
+        Set<Integer> solutionSet = getPalindromicSums(numericSumLimit, baseDifference, 1);
+        for (Integer s : solutionSet) {
+            totalSumOfPalindromicValues += s;
+        }
+        return totalSumOfPalindromicValues;
     }
 
     private static HashSet<Integer> getPalindromicSums(int numericSumLimit, int baseDifference, int startingIteratingPosition) {
         int i;
         HashSet<Integer> palindromicSums = new HashSet<Integer>();
+        for (i = startingIteratingPosition; i < Math.sqrt(numericSumLimit); i+=baseDifference) {
+            palindromicSums.addAll(findPalindromicSumsForInteger(numericSumLimit, baseDifference, i + baseDifference));
+        }
+        return palindromicSums;
+    }
+
+
+    private static HashSet<Integer> findPalindromicSumsForInteger(int numericSumLimit, int baseDifference, int startingIteratingPosition) {
+        int i;
+        HashSet<Integer> palindromicSums = new HashSet<Integer>();
         int currentTotal = 0;
         for (i = startingIteratingPosition; i < Math.sqrt(numericSumLimit); i+=baseDifference) {
-            currentTotal += i*i;
+            currentTotal = currentTotal + i*i;
             if (currentTotal > numericSumLimit) {
-                palindromicSums.addAll(getPalindromicSums(numericSumLimit, baseDifference, startingIteratingPosition + baseDifference));
+                return palindromicSums;
             }
-            else if ((currentTotal > 100) && isNumberPalindrome(currentTotal)){
+            else if (currentTotal > 100 && isNumberPalindrome(currentTotal)) {
                 palindromicSums.add(currentTotal);
             }
         }
@@ -76,7 +93,8 @@ public class PalindromicSums {
 
 
     public static void main(String[] args) {
-        System.out.println(init(700, 2));
+        System.out.println(init(597, 1));
+        System.out.println(findPalindromicSumsForInteger(700, 5, 1));
     }
 
 }
