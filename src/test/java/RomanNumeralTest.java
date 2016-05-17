@@ -83,4 +83,85 @@ public class RomanNumeralTest {
     public void should_return_XX_given_20() {
         assertEquals(RomanNumeral.convertNumberArabicToRoman(20), "XX");
     }
+
+    @Test
+    public void should_return_XXI_given_21() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(21), "XXI");
+    }
+
+    @Test
+    public void should_return_XXIV_given_24() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(24), "XXIV");
+    }
+
+    @Test
+    public void should_return_XXV_given_25() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(25), "XXV");
+    }
+
+    @Test
+    public void should_return_XXIX_given_29() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(29), "XXIX");
+    }
+
+    @Test
+    public void should_return_XXX_given_30() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(30), "XXX");
+    }
+
+    @Test
+    public void should_return_XXXI_given_31() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(31), "XXXI");
+    }
+
+    @Test
+    public void should_return_XXXIV_given_34() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(34), "XXXIV");
+    }
+
+    @Test
+    public void should_return_XXXV_given_35() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(35), "XXXV");
+    }
+
+    @Test
+    public void should_return_XXXVI_given_36() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(36), "XXXVI");
+    }
+
+    @Test
+    public void should_return_XXXIX_given_39() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(39), "XXXIX");
+    }
+
+    @Test
+    public void should_return_XL_given_40() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(40), "XL");
+    }
+
+    @Test
+    public void should_return_XLV_given_45() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(45), "XLV");
+    }
+
+    @Test
+    public void should_return_L_given_50() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(50), "L");
+    }
+
+    @Test
+    public void should_return_LIV_given_54() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(54), "LIV");
+    }
+
+    @Test
+    public void should_return_LV_given_55() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(55), "LV");
+    }
+
+    @Test
+    public void should_return_LX_given_60() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(60), "LX");
+    }
+
 }
