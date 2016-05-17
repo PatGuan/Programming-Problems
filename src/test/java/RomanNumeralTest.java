@@ -150,6 +150,11 @@ public class RomanNumeralTest {
     }
 
     @Test
+    public void should_return_LIII_given_53() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(53), "LIII");
+    }
+
+    @Test
     public void should_return_LIV_given_54() {
         assertEquals(RomanNumeral.convertNumberArabicToRoman(54), "LIV");
     }
@@ -160,8 +165,63 @@ public class RomanNumeralTest {
     }
 
     @Test
+    public void should_return_LVI_given_56() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(56), "LVI");
+    }
+
+    @Test
+    public void should_return_LIX_given_59() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(59), "LIX");
+    }
+
+    @Test
     public void should_return_LX_given_60() {
         assertEquals(RomanNumeral.convertNumberArabicToRoman(60), "LX");
+    }
+
+    @Test
+    public void should_return_LXIV_given_64() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(64), "LXIV");
+    }
+
+    @Test
+    public void should_return_LXV_given_65() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(65), "LXV");
+    }
+
+    @Test
+    public void should_return_LXIX_given_69() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(69), "LXIX");
+    }
+
+    @Test
+    public void should_return_LXXXIII_given_83() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(83), "LXXXIII");
+    }
+
+    @Test
+    public void should_return_LXXXIV_given_84() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(84), "LXXXIV");
+    }
+
+    @Test
+    public void should_return_LXXXV_given_85() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(85), "LXXXV");
+    }
+
+    @Test
+    public void should_return_LXXXIX_given_89() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(89), "LXXXIX");
+    }
+
+    @Test
+    public void should_return_XC_given_90() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(90), "XC");
+    }
+
+    @Test
+    public void should_return_XCIX_given_99() {
+        assertEquals(RomanNumeral.convertNumberArabicToRoman(99), "XCIX");
     }
 
 }
